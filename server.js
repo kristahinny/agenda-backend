@@ -1,9 +1,11 @@
 const express = require('express');
-const app = express();
+const cors = require('cors');
+const app = express(); // <- ISSO precisa vir antes de usar `app`
 
+app.use(cors());
 app.use(express.json());
 
-// Exemplo rota simples
+// Suas rotas
 app.get('/horarios', (req, res) => {
   res.json([
     { id: 1, data: "2025-05-30", hora: "10:00", reservado: false },
@@ -11,12 +13,11 @@ app.get('/horarios', (req, res) => {
   ]);
 });
 
-// Rota para reservar (exemplo)
 app.post('/reservar', (req, res) => {
-  // Lógica para reservar horário
   res.json({ success: true });
 });
 
+// Porta para rodar
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
